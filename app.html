@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinanceWise - Your Smart Finance Buddy</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-light: #3b82f6;
+            --primary-dark: #1d4ed8;
+            --secondary: #0f172a;
+            --accent: #f97316;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --bg-light: #f8fafc;
+            --bg-card: #ffffff;
+            --border-color: #e2e8f0;
+            --success: #10b981;
+            --error: #ef4444;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        header {
+            background-color: var(--bg-card);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .logo i {
+            font-size: 1.75rem;
+        }
+        
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        nav a.active {
+            color: var(--primary);
+            position: relative;
+        }
+        
+        nav a.active:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary);
+        }
+        
+        main {
+            flex: 1;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .hero-section {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 3rem;
+            align-items: center;
+        }
+        
+        .hero-content h1 {
+            font-size: 2.75rem;
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .hero-content p {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            max-width: 90%;
+        }
+        
+        .hero-image {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .hero-image img {
+            max-width: 100%;
+            border-radius: 1rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .card {
+            background-color: var(--bg-card);
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .input-container {
+            margin-bottom: 1.5rem;
+        }
+        
+        .input-container label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            color: var(--text-primary);
+            transition: all 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .input-field:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.2);
+        }
+        
+        .input-addon {
+            position: relative;
+        }
+        
+        .input-addon span {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+        
+        .input-addon input {
+            padding-left: 3rem;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.75rem 1.5rem;
+            font-weight: 500;
+            font-size: 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            gap: 0.5rem;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(37, 99, 235, 0.1);
+        }
+        
+        .full-width {
+            width: 100%;
+        }
+        
+        .chat-container {
+            margin-top: 3rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        
+        .chat-messages {
+            height: 300px;
+            overflow-y: auto;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            background-color: #f8fafc;
+            border: 1px solid var(--border-color);
+            margin-bottom: 1rem;
+        }
+        
+        .chat-message {
+            margin-bottom: 1rem;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            max-width: 80%;
+        }
+        
+        .user-message {
+            background-color: #e0e7ff;
+            margin-left: auto;
+            color: #4338ca;
+        }
+        
+        .bot-message {
+            background-color: #f0fdf4;
+            color: #166534;
+            border-left: 3px solid #16a34a;
+        }
+        
+        .chat-input {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+        
+        .feature-card {
+            padding: 2rem;
+            border-radius: 1rem;
+            background-color: var(--bg-card);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        
+        .feature-icon {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 0.75rem;
+            background-color: rgba(37, 99, 235, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .feature-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+        
+        .feature-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        .error-message {
+            color: var(--error);
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+        
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+        }
+        
+        .footer-col h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+        
+        .footer-col p {
+            color: #94a3b8;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            color: #94a3b8;
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1100px) {
+            .hero-section {
+                grid-template-columns: 1fr;
+            }
+            
+            .hero-image {
+                order: -1;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                justify-content: center;
+                gap: 1rem;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-chart-line"></i>
+                <span>FinanceWise</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#">Loan Calculator</a></li>
+                    <li><a href="finance-guide.html">Finance Guide</a></li>
+                    <li><a href="./about.html">About Us</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        <section class="hero-section">
+            <div class="hero-content">
+                <h1>Unlock Your Financial Future</h1>
+                <p>Get instant loan analysis, personalized repayment guidance, and expert financial advice with our AI-powered assistant.</p>
+                <a href="#calculator" class="btn btn-primary">
+                    <i class="fas fa-calculator"></i>
+                    Try Loan Calculator
+                </a>
+            </div>
+            <div class="hero-image">
+                <img src="https://images.unsplash.com/photo-1579621970795-87facc2f976d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Financial Planning">
+            </div>
+        </section>
+        
+        <section id="calculator" class="card">
+            <h2 class="card-title">
+                <i class="fas fa-rupee-sign"></i>
+                Loan Calculator
+            </h2>
+            
+            <div class="input-container">
+                <label for="loanAmount">Loan Amount (₹)</label>
+                <div class="input-addon">
+                    <span>₹</span>
+                    <input type="number" id="loanAmount" class="input-field" placeholder="Enter loan amount">
+                </div>
+            </div>
+            
+            <div class="input-container">
+                <label for="interestRate">Interest Rate (% per annum)</label>
+                <div class="input-addon">
+                    <span>%</span>
+                    <input type="number" id="interestRate" class="input-field" placeholder="Enter interest rate" step="0.01">
+                </div>
+            </div>
+            
+            <div class="input-container">
+                <label for="loanTerm">Loan Term (years)</label>
+                <input type="number" id="loanTerm" class="input-field" placeholder="Enter loan term">
+            </div>
+            
+            <button onclick="submitLoanDetails()" class="btn btn-primary full-width">
+                <i class="fas fa-search-dollar"></i>
+                Get Detailed Loan Analysis
+            </button>
+            
+            <div id="error-message" class="error-message"></div>
+        </section>
+        
+        <section class="chat-container">
+            <div class="card">
+                <h2 class="card-title">
+                    <i class="fas fa-robot"></i>
+                    FinanceWise AI Assistant
+                </h2>
+                
+                <div id="chatbot-response" class="chat-messages">
+                    <div class="chat-message bot-message">
+                        Welcome to FinanceWise! I'm your AI financial assistant. How can I help you today? You can ask me about loans, EMIs, or any financial questions you have.
+                    </div>
+                </div>
+                
+                <div class="chat-input">
+                    <input type="text" id="chatbot-question" class="input-field" placeholder="Ask any finance question...">
+                    <button id="chatbot-send-button" onclick="sendMessage()" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i>
+                        Send
+                    </button>
+                </div>
+            </div>
+        </section>
+        
+        <section class="features">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <h3 class="feature-title">Smart Loan Calculator</h3>
+                <p class="feature-desc">Get instant EMI calculations and visualize your loan repayment schedule with our advanced calculator.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <h3 class="feature-title">AI Financial Advisor</h3>
+                <p class="feature-desc">Our AI assistant provides personalized financial advice based on your specific situation and goals.</p>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fas fa-lock"></i>
+                </div>
+                <h3 class="feature-title">Secure & Private</h3>
+                <p class="feature-desc">Your financial data stays private. We use bank-level encryption to ensure your information is always protected.</p>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>FinanceWise</h3>
+                <p>Your trusted partner for smart financial decisions. We help you navigate the complex world of personal finance with AI-powered tools.</p>
+                <div class="social-links">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Loan Calculator</a></li>
+                    <li><a href="finance-guide.html">Finance Guide</a></li>
+                    <li><a href="./about.html">About Us</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Resources</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Financial Blog</a></li>
+                    <li><a href="#">Loan Glossary</a></li>
+                    <li><a href="#">EMI Formulas</a></li>
+                    <li><a href="#">FAQs</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Contact Us</h3>
+                <ul class="footer-links">
+                    <li><a href="mailto:support@financewise.com">support@financewise.com</a></li>
+                    <li><a href="tel:+911234567890">+91 123 456 7890</a></li>
+                    <li><a href="#">Feedback Form</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2023 FinanceWise. All rights reserved.
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript code
+        let loanDetails = null;
+        const chatbotResponseDiv = document.getElementById('chatbot-response');
+        const chatbotQuestionInput = document.getElementById('chatbot-question');
+        const GEMINI_API_KEY = 'AIzaSyDs3-41wBQB0chaGlAihcc-FoSUBfgHLVA';
+        const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${GEMINI_API_KEY}`;
+
+        async function submitLoanDetails() {
+            const loanAmountInput = document.getElementById('loanAmount');
+            const interestRateInput = document.getElementById('interestRate');
+            const loanTermInput = document.getElementById('loanTerm');
+            const errorMessageDiv = document.getElementById('error-message');
+
+            const loanAmount = loanAmountInput.value;
+            const interestRate = interestRateInput.value;
+            const loanTerm = loanTermInput.value;
+
+            if (!loanAmount || !interestRate || !loanTerm) {
+                errorMessageDiv.innerText = 'Please fill in all the fields.';
+                return;
+            }
+            errorMessageDiv.innerText = '';
+
+            loanDetails = { loanAmount, interestRate, loanTerm }; // Store for chatbot context
+
+            const dataToSend = { loanAmount, interestRate, loanTerm };
+
+            try {
+                const response = await fetch('http://127.0.0.1:5000/calculate', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(dataToSend)
+                });
+
+                const data = await response.json();
+
+                if (data.response) {
+                    // Store the analysis in local storage and redirect to result.html
+                    localStorage.setItem('loanAnalysis', data.response);
+                    window.location.href = 'result.html';
+                } else {
+                    errorMessageDiv.innerText = `⚠️ ${data.error || "Failed to get analysis"}`;
+                }
+
+            } catch (error) {
+                errorMessageDiv.innerText = 'Network error occurred.';
+                console.error('Error:', error);
+            }
+        }
+
+        async function sendMessage() {
+            const question = chatbotQuestionInput.value.trim();
+            if (question) {
+                // Add user message to chat
+                chatbotResponseDiv.innerHTML += `<div class="chat-message user-message">You: ${question}</div>`;
+                chatbotQuestionInput.value = '';
+                chatbotResponseDiv.scrollTop = chatbotResponseDiv.scrollHeight;
+                
+                // Add loading indicator
+                const loadingId = 'loading-' + Date.now();
+                chatbotResponseDiv.innerHTML += `<div id="${loadingId}" class="chat-message bot-message">Thinking...</div>`;
+                chatbotResponseDiv.scrollTop = chatbotResponseDiv.scrollHeight;
+
+                // Prepare context if loan details are available
+                let prompt = question;
+                if (loanDetails) {
+                    prompt = `Context: User has entered a loan of ₹${loanDetails.loanAmount} at ${loanDetails.interestRate}% interest for ${loanDetails.loanTerm} years.\n\nUser question: ${question}\n\nProvide financial advice based on this loan information. Focus on being helpful, accurate, and concise in your response.`;
+                } else {
+                    prompt = `User question about finance in India: ${question}\n\nProvide helpful, accurate, and concise financial advice related to this question. If the question is not about finance, gently redirect to financial topics.`;
+                }
+
+                try {
+                    // Use Gemini API instead of local server
+                    const response = await fetch(GEMINI_API_URL, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({
+                            contents: [{
+                                parts: [{text: prompt}]
+                            }]
+                        })
+                    });
+
+                    const data = await response.json();
+                    
+                    // Remove loading indicator
+                    document.getElementById(loadingId).remove();
+                    
+                    // Extract response from Gemini API
+                    if (data.candidates && data.candidates[0] && data.candidates[0].content) {
+                        const aiResponse = data.candidates[0].content.parts[0].text;
+                        chatbotResponseDiv.innerHTML += `<div class="chat-message bot-message">AI: ${aiResponse}</div>`;
+                    } else if (data.error) {
+                        console.error('Gemini API error:', data.error);
+                        chatbotResponseDiv.innerHTML += `<div class="chat-message bot-message">AI Error: I encountered an issue processing your request. Please try again.</div>`;
+                    } else {
+                        chatbotResponseDiv.innerHTML += `<div class="chat-message bot-message">AI: I couldn't process that request. Please try asking something about finance or loans.</div>`;
+                    }
+                } catch (error) {
+                    // Remove loading indicator
+                    document.getElementById(loadingId).remove();
+                    console.error('Error:', error);
+                    chatbotResponseDiv.innerHTML += `<div class="chat-message bot-message">AI: Sorry, a network error occurred. Please try again.</div>`;
+                }
+                
+                chatbotResponseDiv.scrollTop = chatbotResponseDiv.scrollHeight;
+            }
+        }
+        
+        // Event listener for Enter key in chat input
+        chatbotQuestionInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html> 

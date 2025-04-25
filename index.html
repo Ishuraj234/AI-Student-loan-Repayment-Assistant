@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Finance Buddy - Your Personal Financial Assistant</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8faff;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 0;
+        }
+        
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            color: #2563eb;
+        }
+        
+        .logo span {
+            color: #64748b;
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: #64748b;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: #2563eb;
+        }
+        
+        .hero {
+            display: flex;
+            align-items: center;
+            padding: 80px 0;
+            gap: 60px;
+        }
+        
+        .hero-content {
+            flex: 1;
+        }
+        
+        .hero-image {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .hero-image img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+        
+        h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #1e293b;
+            line-height: 1.2;
+        }
+        
+        h1 span {
+            color: #2563eb;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: #64748b;
+            margin-bottom: 40px;
+            max-width: 80%;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            box-shadow: 0 10px 20px rgba(37, 99, 235, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(37, 99, 235, 0.3);
+        }
+        
+        .features {
+            padding: 80px 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.2rem;
+            margin-bottom: 60px;
+            color: #1e293b;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .feature-card {
+            background-color: #f8faff;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        }
+        
+        .feature-icon {
+            background-color: #dbeafe;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+        }
+        
+        .feature-icon img {
+            width: 35px;
+            height: 35px;
+        }
+        
+        .feature-title {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #1e293b;
+        }
+        
+        .feature-description {
+            color: #64748b;
+        }
+        
+        .testimonials {
+            padding: 80px 0;
+            background-color: #f1f5f9;
+        }
+        
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+        }
+        
+        .quote {
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            color: #334155;
+            font-style: italic;
+        }
+        
+        .client {
+            display: flex;
+            align-items: center;
+        }
+        
+        .client-image {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-right: 15px;
+        }
+        
+        .client-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        
+        .client-name {
+            font-weight: 600;
+            color: #1e293b;
+        }
+        
+        .client-position {
+            font-size: 0.9rem;
+            color: #64748b;
+        }
+        
+        .cta-section {
+            padding: 80px 0;
+            text-align: center;
+            background-color: white;
+        }
+        
+        .cta-title {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #1e293b;
+        }
+        
+        .cta-description {
+            font-size: 1.2rem;
+            color: #64748b;
+            margin-bottom: 40px;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        footer {
+            background-color: #1e293b;
+            color: #e2e8f0;
+            padding: 60px 0 30px;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            color: white;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-column a {
+            text-decoration: none;
+            color: #cbd5e1;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-column a:hover {
+            color: white;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid #334155;
+            color: #94a3b8;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 1024px) {
+            .hero {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .subtitle {
+                max-width: 100%;
+                margin-left: auto;
+                margin-right: auto;
+            }
+            
+            .hero-image {
+                order: -1;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .feature-grid, .testimonial-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <nav>
+            <div class="logo">Smart<span>Finance</span></div>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#testimonials">Testimonials</a>
+                <a href="#cta">Contact</a>
+            </div>
+        </nav>
+    </div>
+    
+    <section class="hero">
+        <div class="container">
+            <div class="hero">
+                <div class="hero-content">
+                    <h1>Your <span>Personal</span> Finance Assistant</h1>
+                    <p class="subtitle">Get instant loan analysis, personalized repayment plans, and expert financial advice with our AI-powered assistant.</p>
+                    <a href="app.html" class="cta-button">Get Started</a>
+                </div>
+                <div class="hero-image">
+                    <img src="./web.jpg" alt="Smart Finance Dashboard">
+            </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="features" id="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose Smart Finance Buddy</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="./icon-intelligent.svg" alt="Intelligent Analysis">
+                    </div>
+                    <h3 class="feature-title">Intelligent Analysis</h3>
+                    <p class="feature-description">Our AI analyzes your loan details and provides personalized insights to make better financial decisions.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="./icon-expert.svg" alt="Expert Recommendations">
+                    </div>
+                    <h3 class="feature-title">Expert Recommendations</h3>
+                    <p class="feature-description">Get expert advice tailored to your specific financial situation and goals.</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <img src="./icon-repayment.svg" alt="Smart Repayment Plans">
+                    </div>
+                    <h3 class="feature-title">Smart Repayment Plans</h3>
+                    <p class="feature-description">Develop optimal repayment strategies that save you money and reduce your loan term.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="testimonials" id="testimonials">
+        <div class="container">
+            <h2 class="section-title">What Our Users Say</h2>
+            <div class="testimonial-grid">
+                <div class="testimonial-card">
+                    <p class="quote">"Smart Finance Buddy helped me save over ₹2 lakh on my home loan by optimizing my repayment strategy. The AI assistant is incredibly knowledgeable!"</p>
+                    <div class="client">
+                        <div class="client-image">
+                            <img src="https://via.placeholder.com/50/1e40af/ffffff?text=R" alt="Rajesh K.">
+                        </div>
+                        <div>
+                            <div class="client-name">Rajesh K.</div>
+                            <div class="client-position">Home Owner</div>
+            </div>
+        </div>
+    </div>
+                
+                <div class="testimonial-card">
+                    <p class="quote">"I was overwhelmed by all the loan options available. This tool simplified everything and helped me choose the best option for my situation."</p>
+                    <div class="client">
+                        <div class="client-image">
+                            <img src="https://via.placeholder.com/50/1e40af/ffffff?text=P" alt="Priya M.">
+                        </div>
+                        <div>
+                            <div class="client-name">Priya M.</div>
+                            <div class="client-position">Small Business Owner</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="quote">"The chatbot answered all my questions about personal loans and helped me understand the terms I didn't know. Very user-friendly!"</p>
+                    <div class="client">
+                        <div class="client-image">
+                            <img src="https://via.placeholder.com/50/1e40af/ffffff?text=A" alt="Ankit S.">
+                        </div>
+                        <div>
+                            <div class="client-name">Ankit S.</div>
+                            <div class="client-position">IT Professional</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section class="cta-section" id="cta">
+        <div class="container">
+            <h2 class="cta-title">Ready to Take Control of Your Finances?</h2>
+            <p class="cta-description">Join thousands of users who have optimized their loan payments and made smarter financial decisions with Smart Finance Buddy.</p>
+            <a href="app.html" class="cta-button">Get Started Now</a>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Company</h3>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Our Team</a></li>
+                        <li><a href="#">Careers</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Features</h3>
+                    <ul>
+                        <li><a href="#">Loan Calculator</a></li>
+                        <li><a href="#">AI Assistant</a></li>
+                        <li><a href="#">Repayment Plans</a></li>
+                        <li><a href="#">Financial Tips</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Resources</h3>
+                    <ul>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Guides</a></li>
+                        <li><a href="#">FAQs</a></li>
+                        <li><a href="#">Support</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms of Service</a></li>
+                        <li><a href="#">Disclaimer</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                &copy; 2023 Smart Finance Buddy. All rights reserved.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

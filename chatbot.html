@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Loan Chat Assistant</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f4f8;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    .chat-container {
+      width: 90%;
+      max-width: 800px;
+      background: #ffffff;
+      border-radius: 12px;
+      box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .chat-box {
+      flex: 1;
+      padding: 20px;
+      overflow-y: auto;
+      height: 500px;
+    }
+
+    .message {
+      padding: 12px 16px;
+      border-radius: 12px;
+      margin-bottom: 12px;
+      max-width: 80%;
+      line-height: 1.5;
+    }
+
+    .user {
+      align-self: flex-end;
+      background: #e3f2fd;
+      color: #0d47a1;
+    }
+
+    .bot {
+      align-self: flex-start;
+      background: #f1f8e9;
+      color: #33691e;
+    }
+
+    .input-container {
+      display: flex;
+      border-top: 1px solid #ddd;
+    }
+
+    .input-container input {
+      flex: 1;
+      border: none;
+      padding: 14px;
+      font-size: 16px;
+    }
+
+    .input-container button {
+      background: #2196f3;
+      color: white;
+      border: none;
+      padding: 0 20px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .input-container button:hover {
+      background: #1976d2;
+    }
+  </style>
+</head>
+<body>
+  <div class="chat-container">
+    <div class="chat-box" id="chatBox">
+      <div class="message bot">Hi! I'm your loan assistant. Ask me anything about your student loan.</div>
+    </div>
+    <div class="input-container">
+      <input type="text" id="userInput" placeholder="Ask a question..." />
+      <button onclick="sendMessage()">Send</button>
+    </div>
+  </div>
+
+  <script>
+    async function sendMessage() {
+      const input = document.getElementById('userInput');
+      const chatBox = document.getElementById('chatBox');
+      const question = input.value.trim();
+      if (!question) return;
+
+      // Add user message to chat
+      const userMessage = document.createElement('div');
+      userMessage.className = 'message user';
+      userMessage.textContent = question;
+      chatBox.appendChild(userMessage);
+      input.value = '';
+      chatBox.scrollTop = chatBox.scrollHeight;
+
+      // Add loading bot message
+      const botMessage = document.createElement('div');
+      botMessage.className = 'message bot';
+      botMessage.textContent = 'Typing...';
+      chatBox.appendChild(botMessage);
+
+      try {
+        const res = await fetch('http://localhost:5000/ask', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ question })
+        });
+        const data = await res.json();
+        botMessage.textContent = data.response || 'Sorry, I couldn’t understand that.';
+      } catch (err) {
+        botMessage.textContent = 'Error connecting to the server.';
+        console.error(err);
+      }
+
+      chatBox.scrollTop = chatBox.scrollHeight;
+    }
+
+    // Enter key support
+    document.getElementById('userInput').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') {
+        sendMessage();
+      }
+    });
+  </script>
+</body>
+</html>

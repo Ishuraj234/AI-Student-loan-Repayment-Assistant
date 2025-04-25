@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Guide - FinanceWise</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-light: #3b82f6;
+            --primary-dark: #1d4ed8;
+            --secondary: #0f172a;
+            --accent: #f97316;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --bg-light: #f8fafc;
+            --bg-card: #ffffff;
+            --border-color: #e2e8f0;
+            --success: #10b981;
+            --error: #ef4444;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        header {
+            background-color: var(--bg-card);
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .logo i {
+            font-size: 1.75rem;
+        }
+        
+        nav ul {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+        
+        nav a:hover {
+            color: var(--primary);
+        }
+        
+        nav a.active {
+            color: var(--primary);
+            position: relative;
+        }
+        
+        nav a.active:after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary);
+        }
+        
+        main {
+            flex: 1;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .page-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: linear-gradient(to right, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .page-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .topics-nav {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 2rem;
+        }
+        
+        .topic-link {
+            padding: 0.6rem 1.2rem;
+            background-color: var(--bg-card);
+            border-radius: 2rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .topic-link:hover, .topic-link.active {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+        
+        .section-title {
+            font-size: 1.75rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--primary-light);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        
+        .card {
+            background-color: var(--bg-card);
+            border-radius: 1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            padding: 2rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-bottom: 2rem;
+        }
+        
+        .card-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        
+        .guide-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 1rem;
+        }
+        
+        .guide-card {
+            background-color: var(--bg-card);
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .guide-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        }
+        
+        .guide-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+        
+        .guide-content {
+            padding: 1.5rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .guide-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--text-primary);
+        }
+        
+        .guide-desc {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+        
+        .tag {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            background-color: rgba(37, 99, 235, 0.1);
+            color: var(--primary);
+            border-radius: 1rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .guide-footer {
+            margin-top: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.6rem 1.2rem;
+            font-weight: 500;
+            font-size: 1rem;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+        
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background-color: transparent;
+            color: var(--primary);
+            border: 1px solid var(--primary);
+        }
+        
+        .btn-secondary:hover {
+            background-color: rgba(37, 99, 235, 0.1);
+        }
+        
+        .article-section {
+            margin-bottom: 3rem;
+        }
+        
+        .article-content {
+            margin-bottom: 2rem;
+        }
+        
+        .article-content h3 {
+            font-size: 1.3rem;
+            margin: 1.5rem 0 0.75rem;
+            color: var(--text-primary);
+        }
+        
+        .article-content p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        .article-content ul, .article-content ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        .article-content li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .highlight-box {
+            background-color: rgba(37, 99, 235, 0.05);
+            border-left: 3px solid var(--primary);
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 0 0.5rem 0.5rem 0;
+        }
+        
+        .highlight-box p:last-child {
+            margin-bottom: 0;
+        }
+        
+        .resource-card {
+            padding: 1.5rem;
+            border-radius: 0.75rem;
+            background-color: var(--bg-card);
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .resource-icon {
+            width: 3.5rem;
+            height: 3.5rem;
+            border-radius: 0.75rem;
+            background-color: rgba(37, 99, 235, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+        
+        .resource-content {
+            flex-grow: 1;
+        }
+        
+        .resource-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+        
+        .resource-desc {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+        
+        footer {
+            background-color: var(--secondary);
+            color: white;
+            padding: 3rem 2rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+        }
+        
+        .footer-col h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+        
+        .footer-col p {
+            color: #94a3b8;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.75rem;
+        }
+        
+        .footer-links a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+        
+        .social-icon {
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.25rem;
+            transition: all 0.3s;
+        }
+        
+        .social-icon:hover {
+            background-color: var(--primary);
+            transform: translateY(-3px);
+        }
+        
+        .copyright {
+            color: #94a3b8;
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1100px) {
+            .footer-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-container {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                justify-content: center;
+                gap: 1rem;
+            }
+            
+            .footer-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .guide-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <i class="fas fa-chart-line"></i>
+                <span>FinanceWise</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="app.html">Home</a></li>
+                    <li><a href="app.html#calculator">Loan Calculator</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="finance-guide.html" class="active">Finance Guide</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <main>
+        <div class="page-header">
+            <h1 class="page-title">Finance Guide</h1>
+            <p class="page-subtitle">Explore our comprehensive resources to enhance your financial knowledge and make smarter money decisions.</p>
+        </div>
+        
+        <div class="topics-nav">
+            <a href="#loans" class="topic-link active">Loans</a>
+            <a href="#investments" class="topic-link">Investments</a>
+            <a href="#savings" class="topic-link">Savings</a>
+            <a href="#taxes" class="topic-link">Taxes</a>
+            <a href="#budget" class="topic-link">Budgeting</a>
+            <a href="#retirement" class="topic-link">Retirement</a>
+        </div>
+        
+        <section id="loans" class="article-section card">
+            <h2 class="section-title">
+                <i class="fas fa-landmark"></i>
+                Understanding Loans
+            </h2>
+            
+            <div class="article-content">
+                <p>Loans are financial tools that allow you to borrow money that must be repaid over time, typically with interest. Understanding how different loans work is essential for making informed financial decisions.</p>
+                
+                <h3>Types of Loans</h3>
+                <p>In India, there are several common types of loans available to individuals and businesses:</p>
+                <ul>
+                    <li><strong>Home Loans:</strong> Designed to help you purchase or renovate a property.</li>
+                    <li><strong>Personal Loans:</strong> Unsecured loans that can be used for any purpose.</li>
+                    <li><strong>Car Loans:</strong> Specifically for purchasing vehicles.</li>
+                    <li><strong>Education Loans:</strong> For funding higher education expenses.</li>
+                    <li><strong>Business Loans:</strong> To support business operations and expansion.</li>
+                </ul>
+                
+                <div class="highlight-box">
+                    <h3>Key Loan Terms You Should Know</h3>
+                    <ul>
+                        <li><strong>Principal:</strong> The original amount borrowed.</li>
+                        <li><strong>Interest Rate:</strong> The cost of borrowing, expressed as a percentage of the principal.</li>
+                        <li><strong>EMI (Equated Monthly Installment):</strong> The fixed amount you repay each month.</li>
+                        <li><strong>Loan Term:</strong> The time period over which the loan must be repaid.</li>
+                        <li><strong>Processing Fee:</strong> A one-time charge for processing your loan application.</li>
+                        <li><strong>Prepayment Penalty:</strong> Fee charged if you repay the loan before the term ends.</li>
+                    </ul>
+                </div>
+                
+                <h3>How Interest Works</h3>
+                <p>There are two primary methods for calculating loan interest:</p>
+                <ul>
+                    <li><strong>Flat Rate:</strong> Interest is calculated on the original principal throughout the loan term.</li>
+                    <li><strong>Reducing Balance:</strong> Interest is calculated on the outstanding balance, which decreases with each EMI payment.</li>
+                </ul>
+                <p>Reducing balance interest is more favorable as you pay less overall interest compared to flat rate interest.</p>
+                
+                <h3>Factors That Affect Loan Approval</h3>
+                <ul>
+                    <li>Credit score and history</li>
+                    <li>Income stability and level</li>
+                    <li>Existing debt obligations</li>
+                    <li>Employment history</li>
+                    <li>Value of collateral (for secured loans)</li>
+                </ul>
+            </div>
+            
+            <h3 class="card-title">Recommended Guides</h3>
+            <div class="guide-grid">
+                <div class="guide-card">
+                    <img src="https://images.unsplash.com/photo-1560520031-3a4dc4e9de0c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Home Loan Guide" class="guide-img">
+                    <div class="guide-content">
+                        <div class="guide-title">Complete Home Loan Guide</div>
+                        <p class="guide-desc">Everything you need to know about home loans in India, from application to repayment strategies.</p>
+                        <div>
+                            <span class="tag">Home Loan</span>
+                            <span class="tag">Real Estate</span>
+                        </div>
+                        <div class="guide-footer">
+                            <a href="#" class="btn btn-primary">Read Guide</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="guide-card">
+                    <img src="https://images.unsplash.com/photo-1444653614773-995cb1ef9efa?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Education Loan Guide" class="guide-img">
+                    <div class="guide-content">
+                        <div class="guide-title">Education Loan Simplified</div>
+                        <p class="guide-desc">Learn how to finance higher education through student loans and maximize tax benefits.</p>
+                        <div>
+                            <span class="tag">Education</span>
+                            <span class="tag">Tax Benefits</span>
+                        </div>
+                        <div class="guide-footer">
+                            <a href="#" class="btn btn-primary">Read Guide</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section id="investments" class="article-section card">
+            <h2 class="section-title">
+                <i class="fas fa-chart-line"></i>
+                Smart Investment Strategies
+            </h2>
+            
+            <div class="article-content">
+                <p>Investing is how you put your money to work for long-term growth. A strategic investment approach can help you build wealth and achieve your financial goals.</p>
+                
+                <h3>Investment Options in India</h3>
+                <ul>
+                    <li><strong>Equity (Stocks):</strong> Ownership shares in companies listed on stock exchanges.</li>
+                    <li><strong>Mutual Funds:</strong> Professionally managed investment funds pooled from multiple investors.</li>
+                    <li><strong>Fixed Deposits:</strong> Low-risk investments with banks offering guaranteed returns.</li>
+                    <li><strong>Public Provident Fund (PPF):</strong> A government-backed long-term savings scheme.</li>
+                    <li><strong>Real Estate:</strong> Investment in property for rental income or appreciation.</li>
+                    <li><strong>Gold:</strong> Traditional investment in physical gold or gold ETFs.</li>
+                </ul>
+                
+                <div class="highlight-box">
+                    <h3>Investment Principles to Follow</h3>
+                    <ul>
+                        <li><strong>Start Early:</strong> The power of compounding works best over longer periods.</li>
+                        <li><strong>Diversify:</strong> Spread investments across different asset classes to manage risk.</li>
+                        <li><strong>Regular Investing:</strong> Consider SIPs (Systematic Investment Plans) for disciplined investing.</li>
+                        <li><strong>Long-term Perspective:</strong> Focus on long-term growth rather than short-term market fluctuations.</li>
+                        <li><strong>Risk Assessment:</strong> Understand your risk tolerance before choosing investment options.</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <h3 class="card-title">Investment Resources</h3>
+            <div class="resource-card">
+                <div class="resource-icon">
+                    <i class="fas fa-calculator"></i>
+                </div>
+                <div class="resource-content">
+                    <div class="resource-title">Investment Returns Calculator</div>
+                    <p class="resource-desc">Calculate potential returns on different investment options based on your investment amount and time period.</p>
+                    <a href="#" class="btn btn-secondary">Use Calculator</a>
+                </div>
+            </div>
+            
+            <div class="resource-card">
+                <div class="resource-icon">
+                    <i class="fas fa-book"></i>
+                </div>
+                <div class="resource-content">
+                    <div class="resource-title">Beginner's Guide to Stock Market</div>
+                    <p class="resource-desc">An easy-to-understand guide that explains how the stock market works and how to start investing in stocks.</p>
+                    <a href="#" class="btn btn-secondary">Download Guide</a>
+                </div>
+            </div>
+        </section>
+        
+        <section id="savings" class="article-section card">
+            <h2 class="section-title">
+                <i class="fas fa-piggy-bank"></i>
+                Effective Saving Techniques
+            </h2>
+            
+            <div class="article-content">
+                <p>Building a solid savings foundation is the first step toward financial security. Effective saving habits help you manage emergencies and achieve your short and long-term goals.</p>
+                
+                <h3>The 50-30-20 Rule</h3>
+                <p>A simple budget framework that allocates your income as follows:</p>
+                <ul>
+                    <li><strong>50% for Needs:</strong> Essential expenses like housing, food, and utilities.</li>
+                    <li><strong>30% for Wants:</strong> Non-essential purchases and lifestyle choices.</li>
+                    <li><strong>20% for Savings:</strong> Emergency fund, retirement, and other financial goals.</li>
+                </ul>
+                
+                <h3>Emergency Fund Essentials</h3>
+                <p>An emergency fund is your financial safety net. Aim to save 3-6 months of essential expenses in a liquid, easily accessible account. This provides protection against unexpected events like medical emergencies or job loss.</p>
+                
+                <div class="highlight-box">
+                    <h3>Saving Strategies That Work</h3>
+                    <ul>
+                        <li><strong>Automate Savings:</strong> Set up automatic transfers to your savings account on payday.</li>
+                        <li><strong>Save Windfalls:</strong> Commit to saving a percentage of bonuses, tax refunds, or other unexpected income.</li>
+                        <li><strong>Use the 24-Hour Rule:</strong> Wait 24 hours before making any non-essential purchase over ₹5,000.</li>
+                        <li><strong>Challenge Expenses:</strong> Regularly review and challenge your recurring expenses and subscriptions.</li>
+                        <li><strong>Track Progress:</strong> Monitor your savings progress and celebrate milestones.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>FinanceWise</h3>
+                <p>Your trusted partner for smart financial decisions. We help you navigate the complex world of personal finance with AI-powered tools.</p>
+                <div class="social-links">
+                    <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="app.html">Home</a></li>
+                    <li><a href="app.html#calculator">Loan Calculator</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="finance-guide.html">Finance Guide</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Resources</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Financial Blog</a></li>
+                    <li><a href="#">Loan Glossary</a></li>
+                    <li><a href="#">EMI Formulas</a></li>
+                    <li><a href="#">FAQs</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-col">
+                <h3>Contact Us</h3>
+                <ul class="footer-links">
+                    <li><a href="mailto:support@financewise.com">support@financewise.com</a></li>
+                    <li><a href="tel:+911234567890">+91 123 456 7890</a></li>
+                    <li><a href="#">Feedback Form</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2023 FinanceWise. All rights reserved.
+        </div>
+    </footer>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Navigation for topic links
+            const topicLinks = document.querySelectorAll('.topic-link');
+            
+            topicLinks.forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Remove active class from all links
+                    topicLinks.forEach(l => l.classList.remove('active'));
+                    
+                    // Add active class to clicked link
+                    this.classList.add('active');
+                    
+                    // Smooth scroll to section
+                    const targetId = this.getAttribute('href').substring(1);
+                    const targetSection = document.getElementById(targetId);
+                    
+                    if (targetSection) {
+                        window.scrollTo({
+                            top: targetSection.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                    
+                    e.preventDefault();
+                });
+            });
+        });
+    </script>
+</body>
+</html> 
